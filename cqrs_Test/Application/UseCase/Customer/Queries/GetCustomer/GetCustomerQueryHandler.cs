@@ -21,12 +21,25 @@ namespace cqrs_Test.Application.UseCase.Customer.Queries.GetCustomer
 
             var result = await konteks.Customer.FirstOrDefaultAsync(e => e.id == request.Id);
 
-            return new GetCustomerDto
+            if(result!=null)
             {
-                Status = true,
-                Message = "Customer successfully retrieved",
-                Data = result
-            };
+                return new GetCustomerDto
+                {
+                    Status = true,
+                    Message = "Customer successfully retrieved",
+                    Data = result
+                };
+            }
+            else
+            {
+                return new GetCustomerDto
+                {
+                    Status = false,
+                    Message = "Customer not found",
+                    Data = result
+                };
+            }
+            
 
         }
     }

@@ -35,7 +35,8 @@ namespace cqrs_Test.Presenter.Controller
         public async Task<ActionResult<GetCustomerDto>> Get(int ID)
         {
             var result = new GetCustomerQuery(ID);
-            return Ok(await meciater.Send(result));
+
+            return result != null ? Ok(await meciater.Send(result)): null;
         }
 
         [HttpPost]
@@ -59,6 +60,8 @@ namespace cqrs_Test.Presenter.Controller
             var command = new DeleteCustomerCommand(ID);
             var result = await meciater.Send(command);
             return result != null ? (IActionResult)Ok(new { Message = "success" }) : NotFound(new { Message = "not found" });
+            //return Ok(result);
+            //return null;
         }
 
 

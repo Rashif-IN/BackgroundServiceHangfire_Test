@@ -29,7 +29,6 @@ namespace cqrs_Test.Application.UseCase.Customer.Command.PutCustomer
             customers.phone_number = request.Dataa.Attributes.phone_number;
             customers.updated_at = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
 
-
             await konteks.SaveChangesAsync(cancellationToken);
 
             return new PutCustomerCommandDto

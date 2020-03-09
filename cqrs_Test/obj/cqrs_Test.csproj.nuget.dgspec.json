@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/user/Projects/cqrs_Test/cqrs_Test/cqrs_Test.csproj": {}
+    "/Users/user/Projects/BackgroundserviceHangcqrs_Test/cqrs_Test/cqrs_Test.csproj": {}
   },
   "projects": {
-    "/Users/user/Projects/cqrs_Test/cqrs_Test/cqrs_Test.csproj": {
+    "/Users/user/Projects/BackgroundserviceHangcqrs_Test/cqrs_Test/cqrs_Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/user/Projects/cqrs_Test/cqrs_Test/cqrs_Test.csproj",
+        "projectUniqueName": "/Users/user/Projects/BackgroundserviceHangcqrs_Test/cqrs_Test/cqrs_Test.csproj",
         "projectName": "cqrs_Test",
-        "projectPath": "/Users/user/Projects/cqrs_Test/cqrs_Test/cqrs_Test.csproj",
+        "projectPath": "/Users/user/Projects/BackgroundserviceHangcqrs_Test/cqrs_Test/cqrs_Test.csproj",
         "packagesPath": "/Users/user/.nuget/packages/",
-        "outputPath": "/Users/user/Projects/cqrs_Test/cqrs_Test/obj/",
+        "outputPath": "/Users/user/Projects/BackgroundserviceHangcqrs_Test/cqrs_Test/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/user/.nuget/NuGet/NuGet.Config"
+          "/Users/user/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -39,6 +39,26 @@
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[8.6.2, )"
+            },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.7.9, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.9, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.7.9, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.7.9, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.5.1, )"
             },
             "MediatR": {
               "target": "Package",

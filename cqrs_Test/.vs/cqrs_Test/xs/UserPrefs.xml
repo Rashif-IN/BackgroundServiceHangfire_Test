@@ -1,0 +1,48 @@
+﻿<Properties StartupConfiguration="{95D68EDA-C150-4E41-B1F4-C584CD7F8E0C}|Default">
+  <MonoDevelop.Ide.ItemProperties.cqrs__Test PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Application/UseCase/Customer/Queries/GetCustomer/GetCustomerQueryHandler.cs">
+    <Files>
+      <File FileName="Presenter/Controller/CustomerController.cs" Line="63" Column="33" />
+      <File FileName="Application/UseCase/Customer/Command/DeleteCustomer/DeleteCustomerHandler.cs" />
+      <File FileName="Application/UseCase/Customer/Command/PostCustomer/PostCustomerCommandHandler.cs" />
+      <File FileName="Application/UseCase/Customer/Command/PutCustomer/PutCustomerCommandHandler.cs" />
+      <File FileName="Application/UseCase/Customer/Queries/GetCustomer/GetCustomerQueryHandler.cs" />
+      <File FileName="../../../.nuget/packages/hangfire/1.7.9/readme.txt" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="cqrs_Test" expanded="True">
+            <Node name="cqrs_Test" expanded="True">
+              <Node name="Application" expanded="True">
+                <Node name="UseCase" expanded="True">
+                  <Node name="Customer" expanded="True">
+                    <Node name="Command" expanded="True">
+                      <Node name="DeleteCustomer" expanded="True" />
+                      <Node name="PostCustomer" expanded="True" />
+                      <Node name="PutCustomer" expanded="True" />
+                    </Node>
+                    <Node name="Queries" expanded="True">
+                      <Node name="GetCustomer" expanded="True">
+                        <Node name="GetCustomerQueryHandler.cs" selected="True" />
+                      </Node>
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Presenter" expanded="True">
+                <Node name="Controller" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

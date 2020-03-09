@@ -22,11 +22,7 @@ namespace cqrs_Test.Application.UseCase.Customer.Command.DeleteCustomer
 
             if (data == null)
             {
-                return new DeleteCustomerCommandDto
-                {
-                    Message = "Customer not found",
-                    Status = false
-                };
+                return null;
             }
             else
             {
