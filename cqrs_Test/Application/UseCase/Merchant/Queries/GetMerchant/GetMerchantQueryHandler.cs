@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
+using Hangfire;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,12 +21,21 @@ namespace cqrs_Test.Application.UseCase.Merchant.Queries.GetMerchant
 
             var result = await konteks.merhcants.FirstOrDefaultAsync(e => e.id == request.Id);
 
-            return new GetMerchantDto
+            if (result != null)
             {
-                Status = true,
-                Message = "Merchant successfully retrieved",
-                Data = result
-            };
+                BackgroundJob.Enqueue(() => Console.WriteLine("Merchant successfully retrieved"));
+                return new GetMerchantDto
+                {
+                    Status = true,
+                    Message = "Merchant successfully retrieved",
+                    Data = result
+                };
+            }
+            else
+            {
+                BackgroundJob.Enqueue(() => Console.WriteLine("Merchant not found"));
+                return null;
+            }
 
         }
     }

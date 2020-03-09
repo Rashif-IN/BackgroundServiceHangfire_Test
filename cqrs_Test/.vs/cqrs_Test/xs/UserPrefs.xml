@@ -2,12 +2,10 @@
   <MonoDevelop.Ide.ItemProperties.cqrs__Test PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Application/UseCase/Customer/Queries/GetCustomer/GetCustomerQueryHandler.cs">
     <Files>
-      <File FileName="Presenter/Controller/CustomerController.cs" Line="63" Column="33" />
-      <File FileName="Application/UseCase/Customer/Command/DeleteCustomer/DeleteCustomerHandler.cs" />
-      <File FileName="Application/UseCase/Customer/Command/PostCustomer/PostCustomerCommandHandler.cs" />
-      <File FileName="Application/UseCase/Customer/Command/PutCustomer/PutCustomerCommandHandler.cs" />
-      <File FileName="Application/UseCase/Customer/Queries/GetCustomer/GetCustomerQueryHandler.cs" />
-      <File FileName="../../../.nuget/packages/hangfire/1.7.9/readme.txt" />
+      <File FileName="Startup.cs" Line="54" Column="141" />
+      <File FileName="Application/UseCase/Product/Command/PostProduct/PostProductCommandHandler.cs" Line="34" Column="13" />
+      <File FileName="Application/UseCase/Customer/Queries/GetCustomers/GetCustomersQueryHandler.cs" Line="33" Column="8" />
+      <File FileName="Application/UseCase/Customer/Queries/GetCustomer/GetCustomerQueryHandler.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,13 +17,46 @@
                   <Node name="Customer" expanded="True">
                     <Node name="Command" expanded="True">
                       <Node name="DeleteCustomer" expanded="True" />
-                      <Node name="PostCustomer" expanded="True" />
                       <Node name="PutCustomer" expanded="True" />
                     </Node>
                     <Node name="Queries" expanded="True">
                       <Node name="GetCustomer" expanded="True">
                         <Node name="GetCustomerQueryHandler.cs" selected="True" />
                       </Node>
+                      <Node name="GetCustomers" expanded="True" />
+                    </Node>
+                  </Node>
+                  <Node name="CustomerPaymentCard" expanded="True">
+                    <Node name="Command" expanded="True">
+                      <Node name="DeleteCustomerPaymentCard" expanded="True" />
+                      <Node name="PostCustomerPaymentCard" expanded="True" />
+                      <Node name="PutCustomerPaymentCard" expanded="True" />
+                    </Node>
+                    <Node name="Queries" expanded="True">
+                      <Node name="GetCustomerPaymentCard" expanded="True" />
+                      <Node name="GetCustomerPaymentCards" expanded="True" />
+                    </Node>
+                  </Node>
+                  <Node name="Merchant" expanded="True">
+                    <Node name="Command" expanded="True">
+                      <Node name="DeleteMerchant" expanded="True" />
+                      <Node name="PostMerchant" expanded="True" />
+                      <Node name="PutMerchant" expanded="True" />
+                    </Node>
+                    <Node name="Queries" expanded="True">
+                      <Node name="GetMerchant" expanded="True" />
+                      <Node name="GetMerchants" expanded="True" />
+                    </Node>
+                  </Node>
+                  <Node name="Product" expanded="True">
+                    <Node name="Command" expanded="True">
+                      <Node name="DeleteProduct" expanded="True" />
+                      <Node name="PostProduct" expanded="True" />
+                      <Node name="PutProduct" expanded="True" />
+                    </Node>
+                    <Node name="Queries" expanded="True">
+                      <Node name="GetProduct" expanded="True" />
+                      <Node name="GetProducts" expanded="True" />
                     </Node>
                   </Node>
                 </Node>

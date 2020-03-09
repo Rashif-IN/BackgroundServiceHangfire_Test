@@ -32,11 +32,11 @@ namespace cqrs_Test.Presenter.Controller
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomerDto>> Get(int ID)
+        public async Task<IActionResult> Get(int ID)
         {
             var result = new GetCustomerQuery(ID);
-
-            return result != null ? Ok(await meciater.Send(result)): null;
+            var wait = await meciater.Send(result);
+            return wait != null ? (IActionResult)Ok(wait) : NotFound();
         }
 
         [HttpPost]

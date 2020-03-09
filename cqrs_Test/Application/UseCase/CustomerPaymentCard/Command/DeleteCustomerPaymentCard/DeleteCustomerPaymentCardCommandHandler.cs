@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.DeleteCustomerPaymentCard
@@ -19,21 +20,18 @@ namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.DeleteCustom
             var data = await konteks.CPC.FindAsync(request.Id);
             if (data == null)
             {
-                return new DeleteCustomerPaymentCardCommandDto
-                {
-                    Message = "Customer not found",
-                    Status = false
-                };
+                BackgroundJob.Enqueue(() => Console.WriteLine("Customer payment card not found"));
+                return null;
             }
             else
             {
                 konteks.CPC.Remove(data);
                 await konteks.SaveChangesAsync(cancellationToken);
-
+                BackgroundJob.Enqueue(() => Console.WriteLine($"Customer payment card {request.Id} deleted"));
                 return new DeleteCustomerPaymentCardCommandDto
                 {
                     Status = true,
-                    Message = "Customer sucessfully added"
+                    Message = "Customer paymemt card sucessfully added"
                 };
             }
 

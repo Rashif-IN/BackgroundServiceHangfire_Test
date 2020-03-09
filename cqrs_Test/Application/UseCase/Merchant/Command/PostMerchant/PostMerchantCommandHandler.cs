@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
 using cqrs_Test.Application.Models.Query;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.Merchant.Command.PostMerchant
@@ -19,6 +20,7 @@ namespace cqrs_Test.Application.UseCase.Merchant.Command.PostMerchant
 
         public async Task<PostMerchantCommandDto> Handle(PostMerchantCommand request, CancellationToken cancellationToken)
         {
+            BackgroundJob.Enqueue(() => Console.WriteLine("Merchant successfully posted"));
             var mer = new Domain.Entities.Merchants
             {
                 id = request.Dataa.Attributes.id,

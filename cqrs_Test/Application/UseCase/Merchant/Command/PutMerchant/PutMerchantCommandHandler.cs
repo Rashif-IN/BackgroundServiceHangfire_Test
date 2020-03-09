@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
 using cqrs_Test.Application.Models.Query;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.Merchant.Command.PutMerchant
@@ -27,7 +28,7 @@ namespace cqrs_Test.Application.UseCase.Merchant.Command.PutMerchant
             mer.updated_at = Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()).TotalSeconds);
 
 
-
+            BackgroundJob.Enqueue(() => Console.WriteLine("Merchant successfully putted"));
             await konteks.SaveChangesAsync(cancellationToken);
 
             return new PutMerchantCommandDto

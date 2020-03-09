@@ -3,11 +3,11 @@
 using FluentValidation;
 using Hangfire;
 
-namespace cqrs_Test.Application.UseCase.Customer.Command.PostCustomer
+namespace cqrs_Test.Application.UseCase.Customer.Command.PutCustomer
 {
-    public class PostCustomerCommandValidation : AbstractValidator<PostCustomerCommand>
+    public class PutCustomerCommandValidation : AbstractValidator<PutCustomerCommand>
     {
-        public PostCustomerCommandValidation()
+        public PutCustomerCommandValidation()
         {
             
             RuleFor(x => x.Dataa.Attributes.username).NotEmpty().WithMessage("username can't be empty");

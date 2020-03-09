@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
 using cqrs_Test.Application.Models.Query;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.PostCustomerPaymentCard
@@ -20,6 +21,7 @@ namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.PostCustomer
 
         public async Task<PostCustomerPaymentCardCommandDto> Handle(PostCustomerPaymentCardCommand request, CancellationToken cancellationToken)
         {
+            BackgroundJob.Enqueue(() => Console.WriteLine("Customer payment card posted"));
             var cpc = new Domain.Entities.CustomerPaymentCards
             {
                 id = request.Dataa.Attributes.id,

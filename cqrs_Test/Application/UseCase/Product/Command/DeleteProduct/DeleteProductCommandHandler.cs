@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.Product.Command.DeleteProduct
@@ -21,17 +22,14 @@ namespace cqrs_Test.Application.UseCase.Product.Command.DeleteProduct
             var data = await konteks.merhcants.FindAsync(request.Id);
             if (data == null)
             {
-                return new DeleteProductCommandDto
-                {
-                    Message = "Product not found",
-                    Status = false
-                };
+                BackgroundJob.Enqueue(() => Console.WriteLine("Product not found"));
+                return null;
             }
             else
             {
                 konteks.merhcants.Remove(data);
                 await konteks.SaveChangesAsync(cancellationToken);
-
+                BackgroundJob.Enqueue(() => Console.WriteLine("Product successfully removed"));
                 return new DeleteProductCommandDto
                 {
                     Status = true,

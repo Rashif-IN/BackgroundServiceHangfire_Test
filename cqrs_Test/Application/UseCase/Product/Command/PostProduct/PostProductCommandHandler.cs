@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
 using cqrs_Test.Application.Models.Query;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.Product.Command.PostProduct
@@ -30,7 +31,7 @@ namespace cqrs_Test.Application.UseCase.Product.Command.PostProduct
                 created_at = request.Dataa.Attributes.created_at,
                 updated_at = request.Dataa.Attributes.updated_at
             };
-
+            BackgroundJob.Enqueue(() => Console.WriteLine("Product successfully posted"));
             konteks.Product.Add(pro);
             await konteks.SaveChangesAsync(cancellationToken);
 

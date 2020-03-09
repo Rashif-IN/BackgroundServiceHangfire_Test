@@ -18,6 +18,8 @@ using cqrs_Test.Domain.Entities;
 //using cqrs_Test.Infrastructure.Persistences;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Hangfire;
+using Hangfire.PostgreSql;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -49,13 +51,14 @@ namespace cqrs_Test
 
             services.AddDbContext<IContext>(option => option.UseNpgsql("Host=localhost;Database=cqrs;Username=postgres;Password=docker;"));
 
+            services.AddHangfire(config => config.UsePostgreSqlStorage("Host=localhost;Database=hangdb;Username=postgres;Password=docker"));
 
-            services.AddMvc().AddFluentValidation();
+            services.AddMvc().AddFluentValidation(opt => opt.RegisterValidatorsFromAssemblyContaining(typeof(PostProductCommandValidation)));
 
             services.AddMediatR(typeof(GetCustomerQueryHandler).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(GetCustomerPaymentQueryHandler).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(GetMerchantQueryHandler).GetTypeInfo().Assembly);
-            services.AddMediatR(typeof(GetProductQueryHandler).GetTypeInfo().Assembly);
+            //services.AddMediatR(typeof(GetCustomerPaymentQueryHandler).GetTypeInfo().Assembly);
+            //services.AddMediatR(typeof(GetMerchantQueryHandler).GetTypeInfo().Assembly);
+            //services.AddMediatR(typeof(GetProductQueryHandler).GetTypeInfo().Assembly);
 
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -72,10 +75,10 @@ namespace cqrs_Test
                 };
             });
 
-            services.AddTransient<IValidator<PostCustomerCommand>, PostCustomerCommandValidation>()
-                .AddTransient<IValidator<PostCustomerPaymentCardCommand>, PostCustomerPaymentCardCommandValidation>()
-                .AddTransient<IValidator<PostMerchantCommand>, PostMerchantCommandValidation>()
-                .AddTransient<IValidator<PostProductCommand>, PostProductCommandValidation>();
+            //services.AddTransient<IValidator<PostCustomerCommand>, PostCustomerCommandValidation>()
+            //    .AddTransient<IValidator<PostCustomerPaymentCardCommand>, PostCustomerPaymentCardCommandValidation>()
+            //    .AddTransient<IValidator<PostMerchantCommand>, PostMerchantCommandValidation>()
+            //    .AddTransient<IValidator<PostProductCommand>, PostProductCommandValidation>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidator<,>));
 
@@ -88,6 +91,12 @@ namespace cqrs_Test
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseHangfireServer();
+
+            app.UseHangfireDashboard();
+            BackgroundJob.Enqueue(() => Console.WriteLine("Hello world from hangfire!"));
+            RecurringJob.AddOrUpdate(() => Console.WriteLine("Recurring Task"), Cron.Minutely);
 
             app.UseHttpsRedirection();
 

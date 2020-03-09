@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
 using cqrs_Test.Application.Models.Query;
 using cqrs_Test.Domain.Entities;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.Customer.Command.PostCustomer
@@ -20,6 +21,7 @@ namespace cqrs_Test.Application.UseCase.Customer.Command.PostCustomer
 
         public async Task<PostCustomerCommandDto> Handle(PostCustomerCommand request, CancellationToken cancellationToken)
         {
+            BackgroundJob.Enqueue(() => Console.WriteLine("Post Customer Data"));
             var customers = new Domain.Entities.Customers
             {
                 full_name = request.Dataa.Attributes.full_name,

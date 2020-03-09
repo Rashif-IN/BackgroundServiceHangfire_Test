@@ -35,10 +35,11 @@ namespace cqrs_Test.Presenter.Controller
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetCustomerPaymentCardDto>> Get(int ID)
+        public async Task<IActionResult> Get(int ID)
         {
             var result = new GetCustomerPaymentCardQuery(ID);
-            return Ok(await meciater.Send(result));
+            var wait = await meciater.Send(result);
+            return wait != null ? (IActionResult)Ok(wait) : NotFound();
         }
 
         [HttpPost]

@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.Merchant.Command.DeleteMerchant
@@ -21,6 +22,7 @@ namespace cqrs_Test.Application.UseCase.Merchant.Command.DeleteMerchant
             var data = await konteks.merhcants.FindAsync(request.Id);
             if (data == null)
             {
+                BackgroundJob.Enqueue(() => Console.WriteLine("Merchant not found"));
                 return new DeleteMerchantCommandDto
                 {
                     Message = "Merchant not found",
@@ -31,7 +33,7 @@ namespace cqrs_Test.Application.UseCase.Merchant.Command.DeleteMerchant
             {
                 konteks.merhcants.Remove(data);
                 await konteks.SaveChangesAsync(cancellationToken);
-
+                BackgroundJob.Enqueue(() => Console.WriteLine("Merchant removed"));
                 return new DeleteMerchantCommandDto
                 {
                     Status = true,

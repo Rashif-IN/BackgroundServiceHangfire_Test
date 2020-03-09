@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
 using cqrs_Test.Application.Models.Query;
+using Hangfire;
 using MediatR;
 
 namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.PutCustomerPaymentCard
@@ -19,6 +20,7 @@ namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.PutCustomerP
 
         public async Task<PutCustomerPaymentCardCommandDto> Handle(PutCustomerPaymentCardCommand request, CancellationToken cancellationToken)
         {
+            BackgroundJob.Enqueue(() => Console.WriteLine($"Customer payment {request.Dataa.Attributes.id} card putted"));
             var cpc = konteks.CPC.Find(request.Dataa.Attributes.id);
             cpc.customer_id = request.Dataa.Attributes.customer_id;
             cpc.name_on_card = request.Dataa.Attributes.name_on_card;
@@ -35,7 +37,7 @@ namespace cqrs_Test.Application.UseCase.CustomerPaymentCard.Command.PutCustomerP
             return new PutCustomerPaymentCardCommandDto
             {
                 Status = true,
-                Message = "Customer Payment Card successfully putted"
+                Message = $"Customer Payment Card {request.Dataa.Attributes.id} successfully putted"
             };
         }
     }

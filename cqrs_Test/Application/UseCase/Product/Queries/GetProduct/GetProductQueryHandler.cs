@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using cqrs_Test.Application.Interfaces;
+using Hangfire;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,12 +21,22 @@ namespace cqrs_Test.Application.UseCase.Product.Queries.GetProduct
 
             var result = await konteks.Product.FirstOrDefaultAsync(e => e.id == request.Id);
 
-            return new GetProductDto
+            if (result != null)
             {
-                Status = true,
-                Message = "Product successfully retrieved",
-                Data = result
-            };
+                BackgroundJob.Enqueue(() => Console.WriteLine("Product successfully retrieved"));
+                return new GetProductDto
+                {
+                    Status = true,
+                    Message = "Product successfully retrieved",
+                    Data = result
+                };
+            }
+            else
+            {
+                BackgroundJob.Enqueue(() => Console.WriteLine("Product not found"));
+                return null;
+            }
+            
 
         }
     }
